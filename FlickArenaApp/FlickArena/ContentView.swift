@@ -6,14 +6,27 @@
 //
 
 import SwiftUI
+import CoreBluetooth
 
 struct ContentView: View {
+    @StateObject var dartBoardService: DartBoardService = DartBoardService(centralManager: CBCentralManager())
+
+    var text: String {
+        switch dartBoardService.dartBoardSignal {
+        case .changePlayer:
+            return "Change Player"
+        case let .dartOn(score, type):
+            return "\(score), \(type)"
+        default:
+            return "-"
+        }
+    }
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text(text)
+                .fontWeight(.heavy)
+                .font(.system(size: 100))
         }
         .padding()
     }
