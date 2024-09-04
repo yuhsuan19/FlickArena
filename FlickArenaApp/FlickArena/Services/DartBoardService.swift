@@ -67,7 +67,6 @@ extension DartBoardService: CBCentralManagerDelegate {
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print(peripheral)
         central.stopScan()
 
         dartBoard?.delegate = self
