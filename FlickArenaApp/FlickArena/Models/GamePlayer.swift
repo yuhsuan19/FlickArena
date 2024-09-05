@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct GamePlayer {
+struct GamePlayer: Hashable {
     let name: String
 }
