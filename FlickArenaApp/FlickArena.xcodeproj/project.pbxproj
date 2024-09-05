@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */; };
-		34B74B9B2C8840AB00FDEBF9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74B9A2C8840AB00FDEBF9 /* ContentView.swift */; };
 		34B74B9D2C8840AD00FDEBF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */; };
 		34B74BA02C8840AD00FDEBF9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9F2C8840AD00FDEBF9 /* Preview Assets.xcassets */; };
 		34B74BAA2C8840AD00FDEBF9 /* FlickArenaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BA92C8840AD00FDEBF9 /* FlickArenaTests.swift */; };
@@ -18,6 +17,9 @@
 		34B74BC72C8869C800FDEBF9 /* DartBoardScoreAreaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BC62C8869C800FDEBF9 /* DartBoardScoreAreaType.swift */; };
 		34B74BCA2C886A5700FDEBF9 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BC92C886A5700FDEBF9 /* Data+Extensions.swift */; };
 		34B74BCD2C887BC500FDEBF9 /* DartBoardSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BCC2C887BC500FDEBF9 /* DartBoardSignal.swift */; };
+		34B74BD22C8960F300FDEBF9 /* GamePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BD12C8960F300FDEBF9 /* GamePlayer.swift */; };
+		34B74BD42C89613900FDEBF9 /* ZeroOneGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BD32C89613900FDEBF9 /* ZeroOneGameScreen.swift */; };
+		34B74BD82C89705500FDEBF9 /* ZeroOneGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BD72C89705500FDEBF9 /* ZeroOneGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +42,6 @@
 /* Begin PBXFileReference section */
 		34B74B952C8840AB00FDEBF9 /* FlickArena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickArena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickArenaApp.swift; sourceTree = "<group>"; };
-		34B74B9A2C8840AB00FDEBF9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34B74B9F2C8840AD00FDEBF9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		34B74BA52C8840AD00FDEBF9 /* FlickArenaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickArenaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +53,9 @@
 		34B74BC62C8869C800FDEBF9 /* DartBoardScoreAreaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartBoardScoreAreaType.swift; sourceTree = "<group>"; };
 		34B74BC92C886A5700FDEBF9 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		34B74BCC2C887BC500FDEBF9 /* DartBoardSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartBoardSignal.swift; sourceTree = "<group>"; };
+		34B74BD12C8960F300FDEBF9 /* GamePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayer.swift; sourceTree = "<group>"; };
+		34B74BD32C89613900FDEBF9 /* ZeroOneGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGameScreen.swift; sourceTree = "<group>"; };
+		34B74BD72C89705500FDEBF9 /* ZeroOneGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +110,7 @@
 				34B74BC52C88659400FDEBF9 /* Models */,
 				34B74BC42C88658400FDEBF9 /* Services */,
 				34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */,
-				34B74B9A2C8840AB00FDEBF9 /* ContentView.swift */,
+				34B74BD52C89701F00FDEBF9 /* Scenes */,
 				34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */,
 				34B74B9E2C8840AD00FDEBF9 /* Preview Content */,
 			);
@@ -151,6 +155,7 @@
 			children = (
 				34B74BC62C8869C800FDEBF9 /* DartBoardScoreAreaType.swift */,
 				34B74BCC2C887BC500FDEBF9 /* DartBoardSignal.swift */,
+				34B74BD12C8960F300FDEBF9 /* GamePlayer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -161,6 +166,23 @@
 				34B74BC92C886A5700FDEBF9 /* Data+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		34B74BD52C89701F00FDEBF9 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				34B74BD62C89703A00FDEBF9 /* ZeroOneGame */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		34B74BD62C89703A00FDEBF9 /* ZeroOneGame */ = {
+			isa = PBXGroup;
+			children = (
+				34B74BD32C89613900FDEBF9 /* ZeroOneGameScreen.swift */,
+				34B74BD72C89705500FDEBF9 /* ZeroOneGameViewModel.swift */,
+			);
+			path = ZeroOneGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,12 +315,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34B74B9B2C8840AB00FDEBF9 /* ContentView.swift in Sources */,
+				34B74BD22C8960F300FDEBF9 /* GamePlayer.swift in Sources */,
 				34B74BCD2C887BC500FDEBF9 /* DartBoardSignal.swift in Sources */,
 				34B74BC72C8869C800FDEBF9 /* DartBoardScoreAreaType.swift in Sources */,
 				34B74BC32C88437F00FDEBF9 /* DartBoardService.swift in Sources */,
 				34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */,
+				34B74BD42C89613900FDEBF9 /* ZeroOneGameScreen.swift in Sources */,
 				34B74BCA2C886A5700FDEBF9 /* Data+Extensions.swift in Sources */,
+				34B74BD82C89705500FDEBF9 /* ZeroOneGameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,8 +493,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -499,8 +523,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

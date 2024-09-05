@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import CoreBluetooth
 
 @main
 struct FlickArenaApp: App {
+    private let dartBoardService: DartBoardService
+
+    init() {
+        dartBoardService = DartBoardService(centralManager: CBCentralManager())
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let zeroGameViewModel = ZeroOneGameViewModel(dartBoardService: dartBoardService)
+            ZeroOneGameScreen(viewModel: zeroGameViewModel)
         }
     }
 }

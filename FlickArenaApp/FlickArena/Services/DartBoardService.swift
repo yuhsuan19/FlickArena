@@ -6,14 +6,15 @@
 //
 
 import CoreBluetooth
+import Combine
 
-final class DartBoardService: NSObject, ObservableObject {
+final class DartBoardService: NSObject {
 
     static let DEVICE_NAME = "DARTSLIVE HOME"
     static let CHANGE_PALYER_SIGNAL = 83
 
-    @Published var bluetoothEnabled: Bool?
-    @Published var dartBoardSignal: DartBoardSignal?
+    let bluetoothEnabledValueSubject = CurrentValueSubject<Bool?, Never>(nil)
+    let signalSubject = PassthroughSubject<DartBoardSignal, Never>()
 
     private let centralManager: CBCentralManager
     private var dartBoard: CBPeripheral?
@@ -52,10 +53,10 @@ extension DartBoardService {
 extension DartBoardService: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         guard central.state == .poweredOn else {
-            bluetoothEnabled = false
+            bluetoothEnabledValueSubject.send(false)
             return
         }
-        bluetoothEnabled = true
+        bluetoothEnabledValueSubject.send(true)
         centralManager.scanForPeripherals(withServices: nil)
     }
     
@@ -95,7 +96,10 @@ extension DartBoardService: CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard let rawSignal = characteristic.value?.hexEncodedString() else { return }
-        dartBoardSignal = parseRawSignal(rawSignal)
+        guard let rawSignal = characteristic.value?.hexEncodedString(),
+              let signal = parseRawSignal(rawSignal) else {
+            return
+        }
+        signalSubject.send(signal)
     }
 }
