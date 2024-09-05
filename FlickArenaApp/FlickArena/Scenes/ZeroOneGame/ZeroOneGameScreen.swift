@@ -16,7 +16,28 @@ struct ZeroOneGameScreen: View {
     }
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if let winner = viewModel.winner {
+            Text("\(winner.name) is the Winner!!!")
+                .font(.system(size: 120, weight: .bold))
+        } else {
+            VStack(spacing: 12) {
+                Text("Round \(viewModel.currentRound + 1)")
+                    .font(.system(size: 40, weight: .bold))
+                HStack {
+                    ForEach(viewModel.playerDisplayModels) { displayModel in
+                        VStack {
+                            Text(displayModel.playerName)
+                                .font(.system(size: 32, weight: .bold))
+
+                            Text(displayModel.currentScore)
+                                .font(.system(size: 86, weight: .bold))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
     }
 }
 

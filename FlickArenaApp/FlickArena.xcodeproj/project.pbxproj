@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */; };
 		34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */; };
 		34B74B9D2C8840AD00FDEBF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */; };
 		34B74BA02C8840AD00FDEBF9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9F2C8840AD00FDEBF9 /* Preview Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGamePlayerDisplayModel.swift; sourceTree = "<group>"; };
 		34B74B952C8840AB00FDEBF9 /* FlickArena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickArena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickArenaApp.swift; sourceTree = "<group>"; };
 		34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				34B74BD32C89613900FDEBF9 /* ZeroOneGameScreen.swift */,
 				34B74BD72C89705500FDEBF9 /* ZeroOneGameViewModel.swift */,
+				348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */,
 			);
 			path = ZeroOneGame;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */,
 				34B74BD42C89613900FDEBF9 /* ZeroOneGameScreen.swift in Sources */,
 				34B74BCA2C886A5700FDEBF9 /* Data+Extensions.swift in Sources */,
+				348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */,
 				34B74BD82C89705500FDEBF9 /* ZeroOneGameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

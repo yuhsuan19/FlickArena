@@ -14,26 +14,30 @@ final class ZeroOneGameViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private let gameStartScore = 301
+    private let gameStartScore = 101
     private let totalRounds = 10
     private var maxRound: Int { totalRounds - 1 }
 
     private let players: [GamePlayer] = [GamePlayer(name: "Dawson"), GamePlayer(name: "Shane")]
     private var currentPlayer: GamePlayer { players[currentPlayerIndex] }
 
+    var playerDisplayModels: [ZeroOneGamePlayerDisplayModel] {
+        players.map { ZeroOneGamePlayerDisplayModel(playerName: $0.name, currentScore: "\(currentScores[$0] ?? gameStartScore)") }
+    }
+
     @Published var currentPlayerIndex: Int = 0
     @Published var currentRound: Int = 0
     @Published var currentScores: [GamePlayer: Int] = [:]
+    private var lastRoundScores: [GamePlayer: Int] = [:]
     @Published var gameRecords: [GamePlayer: [[(Int, DartBoardScoreAreaType)]]] = [:]
+
+    @Published var winner: GamePlayer?
 
     private var currentPlayerScore: Int {
         guard let score = currentScores[currentPlayer] else {
             fatalError("Fail to get score of current player")
         }
         return score
-    }
-    var displayedScore: String {
-        return "\(currentPlayerScore)"
     }
 
     private var currentPlayerCurrentRoundRecords: [(Int, DartBoardScoreAreaType)] {
@@ -75,6 +79,8 @@ extension ZeroOneGameViewModel {
         players.forEach {
             currentScores[$0] = gameStartScore
         }
+        lastRoundScores = currentScores
+
         gameRecords.removeAll()
         players.forEach {
             gameRecords[$0] = [[]]
@@ -97,6 +103,7 @@ extension ZeroOneGameViewModel {
         let newScore = currentPlayerScore - scoreToRecord
         guard newScore >= 0 else {
             print("BUST")
+            currentScores[currentPlayer] = lastRoundScores[currentPlayer]
             switchPlayer()
             return
         }
@@ -113,6 +120,7 @@ extension ZeroOneGameViewModel {
         if newScore == 0 {
             decideWinner()
         } else if records.count == 3 {
+            lastRoundScores[currentPlayer] = newScore
             switchPlayer()
         }
     }
@@ -152,6 +160,7 @@ extension ZeroOneGameViewModel {
                 winner = $0
             }
         }
-        print("The winner is: \(winner)")
+
+        self.winner = winner
     }
 }
