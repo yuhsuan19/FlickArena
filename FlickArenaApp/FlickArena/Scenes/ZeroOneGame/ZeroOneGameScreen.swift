@@ -26,8 +26,14 @@ struct ZeroOneGameScreen: View {
                 HStack {
                     ForEach(viewModel.playerDisplayModels) { displayModel in
                         VStack {
-                            Text(displayModel.playerName)
-                                .font(.system(size: 32, weight: .bold))
+                            if displayModel.playerName == viewModel.players[viewModel.currentPlayerIndex].name {
+                                Text(displayModel.playerName)
+                                    .font(.system(size: 32, weight: .bold))
+                                    .background(.green)
+                            } else {
+                                Text(displayModel.playerName)
+                                    .font(.system(size: 32, weight: .bold))
+                            }
 
                             Text(displayModel.currentScore)
                                 .font(.system(size: 86, weight: .bold))

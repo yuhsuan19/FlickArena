@@ -11,6 +11,7 @@ import Combine
 final class ZeroOneGameViewModel: ObservableObject {
     
     private let dartBoardService: DartBoardService
+    private let service = Web3AuthService()
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -18,7 +19,7 @@ final class ZeroOneGameViewModel: ObservableObject {
     private let totalRounds = 10
     private var maxRound: Int { totalRounds - 1 }
 
-    private let players: [GamePlayer] = [GamePlayer(name: "Dawson"), GamePlayer(name: "Shane")]
+    let players: [GamePlayer] = [GamePlayer(name: "Vic"), GamePlayer(name: "Jack"), GamePlayer(name: "Dawson"), GamePlayer(name: "shane")]
     private var currentPlayer: GamePlayer { players[currentPlayerIndex] }
 
     var playerDisplayModels: [ZeroOneGamePlayerDisplayModel] {

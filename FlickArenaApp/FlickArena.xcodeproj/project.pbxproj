@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		344F73E12C8AB3480023465D /* Web3AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73E02C8AB3480023465D /* Web3AuthService.swift */; };
+		344F73E42C8AB38B0023465D /* Web3Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 344F73E32C8AB38B0023465D /* Web3Auth */; };
+		344F73E72C8B52F70023465D /* LogInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73E62C8B52F70023465D /* LogInScreen.swift */; };
+		344F73E92C8B53030023465D /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73E82C8B53030023465D /* LogInViewModel.swift */; };
+		344F73EC2C8B5DCB0023465D /* LobbyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73EB2C8B5DCB0023465D /* LobbyScreen.swift */; };
+		344F73EE2C8B5DDA0023465D /* LobbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73ED2C8B5DDA0023465D /* LobbyViewModel.swift */; };
 		348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */; };
 		34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */; };
 		34B74B9D2C8840AD00FDEBF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */; };
@@ -41,6 +47,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		344F73E02C8AB3480023465D /* Web3AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3AuthService.swift; sourceTree = "<group>"; };
+		344F73E62C8B52F70023465D /* LogInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreen.swift; sourceTree = "<group>"; };
+		344F73E82C8B53030023465D /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		344F73EB2C8B5DCB0023465D /* LobbyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyScreen.swift; sourceTree = "<group>"; };
+		344F73ED2C8B5DDA0023465D /* LobbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewModel.swift; sourceTree = "<group>"; };
 		348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGamePlayerDisplayModel.swift; sourceTree = "<group>"; };
 		34B74B952C8840AB00FDEBF9 /* FlickArena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickArena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickArenaApp.swift; sourceTree = "<group>"; };
@@ -65,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344F73E42C8AB38B0023465D /* Web3Auth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +97,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		344F73E52C8B52E20023465D /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				344F73E62C8B52F70023465D /* LogInScreen.swift */,
+				344F73E82C8B53030023465D /* LogInViewModel.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		344F73EA2C8B5DB90023465D /* Lobby */ = {
+			isa = PBXGroup;
+			children = (
+				344F73EB2C8B5DCB0023465D /* LobbyScreen.swift */,
+				344F73ED2C8B5DDA0023465D /* LobbyViewModel.swift */,
+			);
+			path = Lobby;
+			sourceTree = "<group>";
+		};
 		34B74B8C2C8840AB00FDEBF9 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				34B74BC22C88437F00FDEBF9 /* DartBoardService.swift */,
+				344F73E02C8AB3480023465D /* Web3AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -173,6 +204,8 @@
 		34B74BD52C89701F00FDEBF9 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				344F73EA2C8B5DB90023465D /* Lobby */,
+				344F73E52C8B52E20023465D /* LogIn */,
 				34B74BD62C89703A00FDEBF9 /* ZeroOneGame */,
 			);
 			path = Scenes;
@@ -204,6 +237,9 @@
 			dependencies = (
 			);
 			name = FlickArena;
+			packageProductDependencies = (
+				344F73E32C8AB38B0023465D /* Web3Auth */,
+			);
 			productName = FlickArena;
 			productReference = 34B74B952C8840AB00FDEBF9 /* FlickArena.app */;
 			productType = "com.apple.product-type.application";
@@ -276,6 +312,9 @@
 				Base,
 			);
 			mainGroup = 34B74B8C2C8840AB00FDEBF9;
+			packageReferences = (
+				344F73E22C8AB38B0023465D /* XCRemoteSwiftPackageReference "web3auth-swift-sdk" */,
+			);
 			productRefGroup = 34B74B962C8840AB00FDEBF9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -319,13 +358,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				34B74BD22C8960F300FDEBF9 /* GamePlayer.swift in Sources */,
+				344F73EE2C8B5DDA0023465D /* LobbyViewModel.swift in Sources */,
 				34B74BCD2C887BC500FDEBF9 /* DartBoardSignal.swift in Sources */,
 				34B74BC72C8869C800FDEBF9 /* DartBoardScoreAreaType.swift in Sources */,
 				34B74BC32C88437F00FDEBF9 /* DartBoardService.swift in Sources */,
+				344F73E92C8B53030023465D /* LogInViewModel.swift in Sources */,
 				34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */,
 				34B74BD42C89613900FDEBF9 /* ZeroOneGameScreen.swift in Sources */,
 				34B74BCA2C886A5700FDEBF9 /* Data+Extensions.swift in Sources */,
 				348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */,
+				344F73EC2C8B5DCB0023465D /* LobbyScreen.swift in Sources */,
+				344F73E72C8B52F70023465D /* LogInScreen.swift in Sources */,
+				344F73E12C8AB3480023465D /* Web3AuthService.swift in Sources */,
 				34B74BD82C89705500FDEBF9 /* ZeroOneGameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,6 +702,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		344F73E22C8AB38B0023465D /* XCRemoteSwiftPackageReference "web3auth-swift-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Web3Auth/web3auth-swift-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		344F73E32C8AB38B0023465D /* Web3Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 344F73E22C8AB38B0023465D /* XCRemoteSwiftPackageReference "web3auth-swift-sdk" */;
+			productName = Web3Auth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 34B74B8D2C8840AB00FDEBF9 /* Project object */;
 }
