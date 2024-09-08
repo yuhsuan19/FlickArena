@@ -1,14 +1,18 @@
-![FlickArena Logo](logo.png)
+![FlickArena Logo](assets/logo.png)
 # FlickArena
 
 FlickArena is an innovative on-chain game that combines the excitement of physical dart throwing with blockchain technology.
 
 ## System Design
-![System Design](system-design.jpeg)
+![System Design](assets/system-design.jpeg)
 
 ## Overview
 
 FlickArena integrates a physical dart board with smart contracts, creating a unique gaming experience where players' real-world dart throws are recorded and verified on the blockchain.
+
+## Screenshots
+![Game Play](assets/game-play.jpeg)
+![Winner](assets/winner.jpeg)
 
 ## Features
 
