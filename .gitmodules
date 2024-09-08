@@ -1,0 +1,3 @@
+[submodule "FlickArena-contract"]
+	path = FlickArena-contract
+	url = https://github.com/andrew54068/FlickArena-contract.git
