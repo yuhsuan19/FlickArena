@@ -32,8 +32,8 @@ final class LobbyViewModel: ObservableObject {
         if let user = web3AuthService.user {
             self.rpcService = RPCService(
                 user: user,
-                rpcURL: "https://sepolia.base.org",
-                chainId: "84532"
+                rpcURL: "https://spicy-rpc.chiliz.com",
+                chainId: "88882"
             )
         } else {
             print("Fail to initialize RPCService")
