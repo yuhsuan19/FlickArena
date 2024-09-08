@@ -7,19 +7,22 @@
 
 import Foundation
 import Combine
+import web3
+import BigInt
 
 final class ZeroOneGameViewModel: ObservableObject {
-    
-    private let dartBoardService: DartBoardService
-    private let service = Web3AuthService()
+
+    let dartBoardService: DartBoardService
+    let rpcService: RPCService
+    let gameContractAddress: String
 
     private var cancellables = Set<AnyCancellable>()
 
-    private let gameStartScore = 101
+    private let gameStartScore = 301
     private let totalRounds = 10
     private var maxRound: Int { totalRounds - 1 }
 
-    let players: [GamePlayer] = [GamePlayer(name: "Vic"), GamePlayer(name: "Jack"), GamePlayer(name: "Dawson"), GamePlayer(name: "shane")]
+    let players: [GamePlayer]
     private var currentPlayer: GamePlayer { players[currentPlayerIndex] }
 
     var playerDisplayModels: [ZeroOneGamePlayerDisplayModel] {
@@ -48,8 +51,11 @@ final class ZeroOneGameViewModel: ObservableObject {
         return records
     }
 
-    init(dartBoardService: DartBoardService) {
+    init(dartBoardService: DartBoardService, rpcService: RPCService, players: [GamePlayer], gameContractAddress: String) {
+        self.players = players
+        self.rpcService = rpcService
         self.dartBoardService = dartBoardService
+        self.gameContractAddress = gameContractAddress
 
         setUpBindings()
         resetGame()
@@ -60,7 +66,6 @@ final class ZeroOneGameViewModel: ObservableObject {
 extension ZeroOneGameViewModel {
     private func setUpBindings() {
         dartBoardService.signalSubject
-            .dropFirst()
             .sink { [weak self] signal in
                 switch signal {
                 case .changePlayer:
@@ -100,7 +105,16 @@ extension ZeroOneGameViewModel {
         case .innerSingle, .outerSingle:
             break
         }
-        
+
+        let scoreToSend = scoreToRecord
+        Task {
+            await rpcService.dartOn(
+                gameContract: EthereumAddress(stringLiteral: gameContractAddress),
+                player: EthereumAddress(stringLiteral: currentPlayer.address),
+                score: scoreToSend
+            )
+        }
+
         let newScore = currentPlayerScore - scoreToRecord
         guard newScore >= 0 else {
             print("BUST")
@@ -141,7 +155,7 @@ extension ZeroOneGameViewModel {
     }
 
     private func nextRound() {
-        guard currentRound <= maxRound else {
+        guard currentRound < maxRound else {
             decideWinner()
             return
         }

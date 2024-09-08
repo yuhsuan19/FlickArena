@@ -9,4 +9,5 @@ import Foundation
 
 struct GamePlayer: Hashable {
     let name: String
+    let address: String
 }

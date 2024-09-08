@@ -11,12 +11,14 @@ import Combine
 final class LogInViewModel: ObservableObject {
 
     let web3AuthService: Web3AuthService
+    let dartBoardService: DartBoardService
     @Published var isLoggedIn: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(web3AuthService: Web3AuthService) {
+    init(web3AuthService: Web3AuthService, dartBoardService: DartBoardService) {
         self.web3AuthService = web3AuthService
+        self.dartBoardService = dartBoardService
         setUpBindings()
     }
 

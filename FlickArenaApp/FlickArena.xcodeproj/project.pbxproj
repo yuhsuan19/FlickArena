@@ -17,6 +17,8 @@
 		344F73F32C8D42690023465D /* RPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73F22C8D42690023465D /* RPCService.swift */; };
 		344F73F52C8D43BF0023465D /* Web3AuthState+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73F42C8D43BF0023465D /* Web3AuthState+Extensions.swift */; };
 		348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */; };
+		34ACC53D2C8D755400609CF8 /* WaitPlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ACC53C2C8D755400609CF8 /* WaitPlayersViewModel.swift */; };
+		34ACC5402C8D758000609CF8 /* WaitPlayersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ACC53F2C8D758000609CF8 /* WaitPlayersScreen.swift */; };
 		34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */; };
 		34B74B9D2C8840AD00FDEBF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */; };
 		34B74BA02C8840AD00FDEBF9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9F2C8840AD00FDEBF9 /* Preview Assets.xcassets */; };
@@ -58,6 +60,8 @@
 		344F73F22C8D42690023465D /* RPCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCService.swift; sourceTree = "<group>"; };
 		344F73F42C8D43BF0023465D /* Web3AuthState+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3AuthState+Extensions.swift"; sourceTree = "<group>"; };
 		348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGamePlayerDisplayModel.swift; sourceTree = "<group>"; };
+		34ACC53C2C8D755400609CF8 /* WaitPlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitPlayersViewModel.swift; sourceTree = "<group>"; };
+		34ACC53F2C8D758000609CF8 /* WaitPlayersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitPlayersScreen.swift; sourceTree = "<group>"; };
 		34B74B952C8840AB00FDEBF9 /* FlickArena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickArena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickArenaApp.swift; sourceTree = "<group>"; };
 		34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,6 +123,15 @@
 				344F73ED2C8B5DDA0023465D /* LobbyViewModel.swift */,
 			);
 			path = Lobby;
+			sourceTree = "<group>";
+		};
+		34ACC53E2C8D756900609CF8 /* WaitPlayers */ = {
+			isa = PBXGroup;
+			children = (
+				34ACC53C2C8D755400609CF8 /* WaitPlayersViewModel.swift */,
+				34ACC53F2C8D758000609CF8 /* WaitPlayersScreen.swift */,
+			);
+			path = WaitPlayers;
 			sourceTree = "<group>";
 		};
 		34B74B8C2C8840AB00FDEBF9 = {
@@ -212,6 +225,7 @@
 		34B74BD52C89701F00FDEBF9 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				34ACC53E2C8D756900609CF8 /* WaitPlayers */,
 				344F73EA2C8B5DB90023465D /* Lobby */,
 				344F73E52C8B52E20023465D /* LogIn */,
 				34B74BD62C89703A00FDEBF9 /* ZeroOneGame */,
@@ -378,6 +392,8 @@
 				34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */,
 				34B74BD42C89613900FDEBF9 /* ZeroOneGameScreen.swift in Sources */,
 				34B74BCA2C886A5700FDEBF9 /* Data+Extensions.swift in Sources */,
+				34ACC5402C8D758000609CF8 /* WaitPlayersScreen.swift in Sources */,
+				34ACC53D2C8D755400609CF8 /* WaitPlayersViewModel.swift in Sources */,
 				348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */,
 				344F73EC2C8B5DCB0023465D /* LobbyScreen.swift in Sources */,
 				344F73E72C8B52F70023465D /* LogInScreen.swift in Sources */,

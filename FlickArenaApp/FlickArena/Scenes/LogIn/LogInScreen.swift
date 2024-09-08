@@ -9,16 +9,16 @@ import SwiftUI
 
 struct LogInScreen: View {
     @StateObject private var viewModel: LogInViewModel
-    @State private var email: String = ""
+    @State private var email: String = "shane.chi@portto.com"
 
     init(viewModel: LogInViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 36) {
+        VStack(alignment: .leading, spacing: 40) {
             TextField("Enter your E-mail", text: $email)
-                .font(.system(size: 42, weight: .black))
+                .font(.system(size: 50, weight: .black))
                 .keyboardType(.emailAddress)
 
             Button(action: {
@@ -28,7 +28,7 @@ struct LogInScreen: View {
             }) {
                 Text("Log In with Web3Auth")
             }
-            .font(.system(size: 22, weight: .bold))
+            .font(.system(size: 30, weight: .bold))
             .padding()
             .background(Color.blue)
             .foregroundColor(.white)
@@ -36,13 +36,13 @@ struct LogInScreen: View {
         }
         .padding(48)
         .navigationDestination(isPresented: $viewModel.isLoggedIn) {
-            let viewModel = LobbyViewModel(web3AuthService: viewModel.web3AuthService)
+            let viewModel = LobbyViewModel(web3AuthService: viewModel.web3AuthService, dartBoardService: viewModel.dartBoardService)
             LobbyScreen(viewModel: viewModel)
         }
     }
 }
 
-#Preview {
-    let viewModel = LogInViewModel(web3AuthService: Web3AuthService())
-    return LogInScreen(viewModel: viewModel)
-}
+//#Preview {
+//    let viewModel = LogInViewModel(web3AuthService: Web3AuthService())
+//    return LogInScreen(viewModel: viewModel)
+//}

@@ -15,6 +15,9 @@ final class RPCService {
     let addressValueSubject = CurrentValueSubject<String?, Never>(nil)
     let nativeTokenBalValueSubject = CurrentValueSubject<BigUInt?, Never>(nil)
 
+    let gameContractSubject = PassthroughSubject<String, Never>()
+    let secondPlayerAddressSubject = PassthroughSubject<String, Never>()
+
     private let user: EthereumSingleKeyStorageProtocol?
     private var account: EthereumAccount?
     private var address: EthereumAddress? { account?.address }
@@ -35,6 +38,63 @@ final class RPCService {
         setUp()
     }
 
+    func getPlayer2(contract: EthereumAddress) async {
+        guard let client else { return }
+        let getPlayerFunction = GetPlayers(contract: contract)
+
+        while true {
+            do {
+                let response = try await getPlayerFunction.call(withClient: client, responseType: GetPlayers.Response.self)
+
+                if response.addresses.count == 2 {
+                    let strippedAddress = String(response.addresses[1].toChecksumAddress().dropFirst(2))
+                    let length = 40
+                    let startIndex = strippedAddress.index(strippedAddress.startIndex, offsetBy: strippedAddress.count - length)
+                    let range = startIndex..<strippedAddress.endIndex
+                    let trimmedAddress = String(strippedAddress[range])
+                    let formattedAddress = "0x" + trimmedAddress.lowercased()
+
+                    secondPlayerAddressSubject.send(formattedAddress)
+                    break
+                } else {
+                    print("Waiting for more players... Current count: \(response.addresses.count)")
+                    try await Task.sleep(nanoseconds: 3_000_000_000)
+                }
+            } catch {
+                print("Error fetching players: \(error)")
+                break
+            }
+        }
+    }
+
+    func getCreateGameTxReceipt(txHash: String) async {
+        guard let client else { return }
+
+        while true {
+            do {
+                if let receipt = try? await client.eth_getTransactionReceipt(txHash: txHash) {
+                    let logData = receipt.logs[0].data
+                    
+                    let start = logData.index(logData.startIndex, offsetBy: 26)
+                    let end = logData.index(logData.startIndex, offsetBy: 66)
+                    let range = start..<end
+
+                    let gameContractAddress = "0x\(logData[range])"
+                    print(gameContractAddress)
+                    gameContractSubject.send(gameContractAddress)
+                    break
+                } else {
+                    print("polling")
+                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                }
+            } catch {
+                print(error)
+                break
+            }
+        }
+    }
+
+
     func getBalance() {
         guard let client, let address else { return }
         Task {
@@ -48,6 +108,58 @@ final class RPCService {
             } catch {
                 print(error)
             }
+        }
+    }
+
+    func createGame() async {
+        guard let account, let address, let client else { return }
+        let gasPrice = try? await client.eth_gasPrice()
+
+        let createGameFunction = CreateGame(
+            from: address,
+            contract: "0x714f2Cf5CaDf99E635C18865fa65f7697F9A6abc",
+            targetScore: BigUInt(301),
+            maxRounds: BigUInt(10)
+        )
+
+        do {
+            let estimationTx = try createGameFunction.transaction(value: BigUInt(10), gasPrice: gasPrice)
+            let estimatedGas = try await client.eth_estimateGas(estimationTx)
+            let tx = try createGameFunction.transaction(
+                value: BigUInt(10),
+                gasPrice: gasPrice,
+                gasLimit: estimatedGas.multiplied(by: BigUInt(BigInt(1.2)))
+            )
+            let txHash = try await client.eth_sendRawTransaction(tx, withAccount: account)
+            print("Create game tx hash: \(txHash)")
+            await getCreateGameTxReceipt(txHash: txHash)
+        } catch {
+            print(error)
+        }
+    }
+
+    func dartOn(gameContract: EthereumAddress, player: EthereumAddress, score: Int) async {
+        guard let account, let address, let client else { return }
+        let gasPrice = try? await client.eth_gasPrice()
+
+        let flickDart = FlickDart(
+            from: address,
+            contract: gameContract,
+            score: BigUInt(score),
+            player: player
+        )
+
+        do {
+            let estimationTx = try flickDart.transaction(gasPrice: gasPrice)
+            let estimatedGas = try await client.eth_estimateGas(estimationTx)
+            let tx = try flickDart.transaction(
+                gasPrice: gasPrice,
+                gasLimit: estimatedGas.multiplied(by: BigUInt(BigInt(1.2)))
+            )
+            let txHash = try await client.eth_sendRawTransaction(tx, withAccount: account)
+            print("Flick Dart tx hash: \(txHash)")
+        } catch {
+            print(error)
         }
     }
 }
@@ -87,61 +199,99 @@ extension RPCService {
     }
 }
 
+public struct GetPlayers: ABIFunction {
+    public var contract: web3.EthereumAddress
 
-//    func loadSepoliaClient() {
-//        do {
-//            sepoliaClient = EthereumHttpClient(url: URL(string: RPC_URL)!, network: .fromString("\(chainID)"))
-//            account = try EthereumAccount(keyStorage: user! as EthereumSingleKeyStorageProtocol )
-//
-//            print(address)
-//        } catch {
-//            print("Fail to load sepolia client")
-//        }
-//    }
+    public var gasPrice: BigUInt? = nil
+    public var gasLimit: BigUInt? = nil
+    public var from: web3.EthereumAddress? = nil
+    
+    public static var name: String = "getPlayers"
 
-//    func transferBLT() async {
-//        guard let account, let address, let sepoliaClient else { return }
-//
-//        let gasPrice = try? await sepoliaClient.eth_gasPrice()
-//
-//        var function = Transfer(contract: "0x164914A9270fcE48d6172Fac2C1e0eC9023a1f43", from: address, to: "0x444d6CEb52453a1E1918455387Ed2eE9179527Bf", value: 3000000000)
-//        function.gasPrice = gasPrice
-//
-//        if let transaction = try? function.transaction(gasPrice: gasPrice) {
-//            do {
-//                let estimatedGas = try await sepoliaClient.eth_estimateGas(transaction)
-//                function.gasLimit = estimatedGas
-//                let tx = try function.transaction(gasPrice: gasPrice, gasLimit: estimatedGas)
-//                let txHash = try await sepoliaClient.eth_sendRawTransaction(tx, withAccount: account)
-//                print(txHash)
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
+    init(contract: EthereumAddress ) {
+        self.contract = contract
+    }
 
-//public struct Transfer: ABIFunction {
-//    public static let name = "transfer"
-//    public var gasPrice: BigUInt? = nil
-//    public var gasLimit: BigUInt? = nil
-//    public var contract: EthereumAddress
-//    public let from: EthereumAddress?
-//
-//    public let to: EthereumAddress
-//    public let value: BigUInt
-//
-//    public init(contract: EthereumAddress,
-//                from: EthereumAddress? = nil,
-//                to: EthereumAddress,
-//                value: BigUInt) {
-//        self.contract = contract
-//        self.from = from
-//        self.to = to
-//        self.value = value
-//    }
-//
-//    public func encode(to encoder: ABIFunctionEncoder) throws {
-//        try encoder.encode(to)
-//        try encoder.encode(value)
-//    }
-//}
+    public func encode(to encoder: web3.ABIFunctionEncoder) throws {}
+
+    struct Response: ABIResponse {
+        init?(values: [web3.ABIDecoder.DecodedValue]) throws {
+            return nil
+        }
+        
+        static var types: [ABIType.Type] = [ABIArray<EthereumAddress>.self]
+        let addresses: [EthereumAddress]
+
+        init?(data: String) throws {
+            let strippedInput = String(data.dropFirst(2))
+
+            let halfIndex = strippedInput.index(strippedInput.startIndex, offsetBy: strippedInput.count / 2)
+            let firstHalf = "0x\(String(strippedInput[..<halfIndex]))"
+            let secondHalf = "0x\(String(strippedInput[halfIndex...]))"
+
+            if EthereumAddress(stringLiteral: secondHalf) != EthereumAddress.zero {
+                self.addresses = [EthereumAddress(stringLiteral: firstHalf), EthereumAddress(stringLiteral: secondHalf)]
+            } else {
+                self.addresses = [EthereumAddress(stringLiteral: firstHalf)]
+            }
+        }
+    }
+}
+
+struct FlickDart: ABIFunction {
+    public var from: web3.EthereumAddress?
+
+    public static let name = "flickDart"
+    public var gasPrice: BigUInt? = nil
+    public var gasLimit: BigUInt? = nil
+    public var contract: EthereumAddress
+    
+    public let score: BigUInt
+    public let player: EthereumAddress
+
+    init(from: web3.EthereumAddress? = nil, gasPrice: BigUInt? = nil, gasLimit: BigUInt? = nil, contract: EthereumAddress, score: BigUInt, player: EthereumAddress) {
+        self.from = from
+        self.gasPrice = gasPrice
+        self.gasLimit = gasLimit
+        self.contract = contract
+        self.score = score
+        self.player = player
+    }
+
+    public func encode(to encoder: ABIFunctionEncoder) throws {
+        try encoder.encode(score)
+        try encoder.encode(player)
+    }
+}
+
+public struct CreateGame: ABIFunction {
+    public var from: web3.EthereumAddress?
+    
+    public static let name = "createGame"
+    public var gasPrice: BigUInt? = nil
+    public var gasLimit: BigUInt? = nil
+    public var contract: EthereumAddress
+
+    public let targetScore: BigUInt
+    public let maxRounds: BigUInt
+
+    init(
+        from: web3.EthereumAddress?,
+        contract: EthereumAddress,
+        targetScore: BigUInt,
+        maxRounds: BigUInt
+    ) {
+        self.from = from
+        self.contract = contract
+        self.targetScore = targetScore
+        self.maxRounds = maxRounds
+    }
+
+    public func encode(to encoder: ABIFunctionEncoder) throws {
+        try encoder.encode(targetScore)
+        try encoder.encode(maxRounds)
+    }
+}
+
+
+
