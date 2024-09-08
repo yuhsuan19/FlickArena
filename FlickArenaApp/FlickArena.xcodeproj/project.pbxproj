@@ -13,6 +13,9 @@
 		344F73E92C8B53030023465D /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73E82C8B53030023465D /* LogInViewModel.swift */; };
 		344F73EC2C8B5DCB0023465D /* LobbyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73EB2C8B5DCB0023465D /* LobbyScreen.swift */; };
 		344F73EE2C8B5DDA0023465D /* LobbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73ED2C8B5DDA0023465D /* LobbyViewModel.swift */; };
+		344F73F12C8C34860023465D /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 344F73F02C8C34860023465D /* web3.swift */; };
+		344F73F32C8D42690023465D /* RPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73F22C8D42690023465D /* RPCService.swift */; };
+		344F73F52C8D43BF0023465D /* Web3AuthState+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F73F42C8D43BF0023465D /* Web3AuthState+Extensions.swift */; };
 		348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */; };
 		34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */; };
 		34B74B9D2C8840AD00FDEBF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */; };
@@ -52,6 +55,8 @@
 		344F73E82C8B53030023465D /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
 		344F73EB2C8B5DCB0023465D /* LobbyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyScreen.swift; sourceTree = "<group>"; };
 		344F73ED2C8B5DDA0023465D /* LobbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewModel.swift; sourceTree = "<group>"; };
+		344F73F22C8D42690023465D /* RPCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCService.swift; sourceTree = "<group>"; };
+		344F73F42C8D43BF0023465D /* Web3AuthState+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3AuthState+Extensions.swift"; sourceTree = "<group>"; };
 		348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGamePlayerDisplayModel.swift; sourceTree = "<group>"; };
 		34B74B952C8840AB00FDEBF9 /* FlickArena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickArena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickArenaApp.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344F73F12C8C34860023465D /* web3.swift in Frameworks */,
 				344F73E42C8AB38B0023465D /* Web3Auth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +185,7 @@
 			children = (
 				34B74BC22C88437F00FDEBF9 /* DartBoardService.swift */,
 				344F73E02C8AB3480023465D /* Web3AuthService.swift */,
+				344F73F22C8D42690023465D /* RPCService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -197,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				34B74BC92C886A5700FDEBF9 /* Data+Extensions.swift */,
+				344F73F42C8D43BF0023465D /* Web3AuthState+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -239,6 +247,7 @@
 			name = FlickArena;
 			packageProductDependencies = (
 				344F73E32C8AB38B0023465D /* Web3Auth */,
+				344F73F02C8C34860023465D /* web3.swift */,
 			);
 			productName = FlickArena;
 			productReference = 34B74B952C8840AB00FDEBF9 /* FlickArena.app */;
@@ -314,6 +323,7 @@
 			mainGroup = 34B74B8C2C8840AB00FDEBF9;
 			packageReferences = (
 				344F73E22C8AB38B0023465D /* XCRemoteSwiftPackageReference "web3auth-swift-sdk" */,
+				344F73EF2C8C34860023465D /* XCRemoteSwiftPackageReference "web3" */,
 			);
 			productRefGroup = 34B74B962C8840AB00FDEBF9 /* Products */;
 			projectDirPath = "";
@@ -359,6 +369,8 @@
 			files = (
 				34B74BD22C8960F300FDEBF9 /* GamePlayer.swift in Sources */,
 				344F73EE2C8B5DDA0023465D /* LobbyViewModel.swift in Sources */,
+				344F73F52C8D43BF0023465D /* Web3AuthState+Extensions.swift in Sources */,
+				344F73F32C8D42690023465D /* RPCService.swift in Sources */,
 				34B74BCD2C887BC500FDEBF9 /* DartBoardSignal.swift in Sources */,
 				34B74BC72C8869C800FDEBF9 /* DartBoardScoreAreaType.swift in Sources */,
 				34B74BC32C88437F00FDEBF9 /* DartBoardService.swift in Sources */,
@@ -712,6 +724,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		344F73EF2C8C34860023465D /* XCRemoteSwiftPackageReference "web3" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argentlabs/web3.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -719,6 +739,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 344F73E22C8AB38B0023465D /* XCRemoteSwiftPackageReference "web3auth-swift-sdk" */;
 			productName = Web3Auth;
+		};
+		344F73F02C8C34860023465D /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 344F73EF2C8C34860023465D /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

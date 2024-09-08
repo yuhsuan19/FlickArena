@@ -8,6 +8,8 @@
 import Foundation
 import Web3Auth
 import Combine
+import web3
+import BigInt
 
 final class Web3AuthService {
     let logInSuccessSubject = PassthroughSubject<Void, Never>()
@@ -55,5 +57,3 @@ extension Web3AuthService{
         }
     }
 }
-
-

@@ -15,7 +15,20 @@ struct LobbyScreen: View {
     }
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Game Host Address: \(viewModel.gameHostAddress ?? "loading...")")
+            Text("Game Host Balance: \(viewModel.gameHostNativeTokenBalance ?? "loading...")")
+            Button(action: {
+
+            }) {
+                Text("Create New Game")
+            }
+            Spacer()
+        }
+        .padding()
+        .onAppear {
+            viewModel.getBalance()
+        }
     }
 }
 

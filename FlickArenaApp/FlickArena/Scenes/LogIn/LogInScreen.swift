@@ -18,7 +18,7 @@ struct LogInScreen: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 36) {
             TextField("Enter your E-mail", text: $email)
-                .font(.system(size: 48, weight: .black))
+                .font(.system(size: 42, weight: .black))
                 .keyboardType(.emailAddress)
 
             Button(action: {
@@ -28,7 +28,7 @@ struct LogInScreen: View {
             }) {
                 Text("Log In with Web3Auth")
             }
-            .font(.system(size: 24, weight: .bold))
+            .font(.system(size: 22, weight: .bold))
             .padding()
             .background(Color.blue)
             .foregroundColor(.white)
