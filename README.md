@@ -36,6 +36,10 @@ FlickArena integrates a physical dart board with smart contracts, creating a uni
 - IoT sensors for dart board
 - Web3.swift for mobile integration
 
+### Contract Address on Chiliz Testnet
+ - Factory contract: https://testnet.chiliscan.com/address/0x405Bb05F3584CE93c1c033091b420199715E6555/contract/88882/code
+ - Game contract: https://testnet.chiliscan.com/address/0xbD3B8462B96Ef9b51DeE13a46901D781e386EA34/contract/88882/code
+
 ## Getting Started
 
 Host create a game from the factory contract and share the game address with players.
