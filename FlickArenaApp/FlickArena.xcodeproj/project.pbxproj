@@ -32,6 +32,8 @@
 		34B74BD22C8960F300FDEBF9 /* GamePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BD12C8960F300FDEBF9 /* GamePlayer.swift */; };
 		34B74BD42C89613900FDEBF9 /* ZeroOneGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BD32C89613900FDEBF9 /* ZeroOneGameScreen.swift */; };
 		34B74BD82C89705500FDEBF9 /* ZeroOneGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BD72C89705500FDEBF9 /* ZeroOneGameViewModel.swift */; };
+		34E35EC22C9D24D4007DA0AD /* Aptos in Frameworks */ = {isa = PBXBuildFile; productRef = 34E35EC12C9D24D4007DA0AD /* Aptos */; };
+		34E35EC42C9D24D4007DA0AD /* BIP32 in Frameworks */ = {isa = PBXBuildFile; productRef = 34E35EC32C9D24D4007DA0AD /* BIP32 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E35EC22C9D24D4007DA0AD /* Aptos in Frameworks */,
+				34E35EC42C9D24D4007DA0AD /* BIP32 in Frameworks */,
 				344F73F12C8C34860023465D /* web3.swift in Frameworks */,
 				344F73E42C8AB38B0023465D /* Web3Auth in Frameworks */,
 			);
@@ -262,6 +266,8 @@
 			packageProductDependencies = (
 				344F73E32C8AB38B0023465D /* Web3Auth */,
 				344F73F02C8C34860023465D /* web3.swift */,
+				34E35EC12C9D24D4007DA0AD /* Aptos */,
+				34E35EC32C9D24D4007DA0AD /* BIP32 */,
 			);
 			productName = FlickArena;
 			productReference = 34B74B952C8840AB00FDEBF9 /* FlickArena.app */;
@@ -338,6 +344,7 @@
 			packageReferences = (
 				344F73E22C8AB38B0023465D /* XCRemoteSwiftPackageReference "web3auth-swift-sdk" */,
 				344F73EF2C8C34860023465D /* XCRemoteSwiftPackageReference "web3" */,
+				34E35EC02C9D24D4007DA0AD /* XCRemoteSwiftPackageReference "aptos-swift-sdk" */,
 			);
 			productRefGroup = 34B74B962C8840AB00FDEBF9 /* Products */;
 			projectDirPath = "";
@@ -748,6 +755,14 @@
 				minimumVersion = 1.6.1;
 			};
 		};
+		34E35EC02C9D24D4007DA0AD /* XCRemoteSwiftPackageReference "aptos-swift-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ALCOVE-LAB/aptos-swift-sdk.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -760,6 +775,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 344F73EF2C8C34860023465D /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
+		};
+		34E35EC12C9D24D4007DA0AD /* Aptos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E35EC02C9D24D4007DA0AD /* XCRemoteSwiftPackageReference "aptos-swift-sdk" */;
+			productName = Aptos;
+		};
+		34E35EC32C9D24D4007DA0AD /* BIP32 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E35EC02C9D24D4007DA0AD /* XCRemoteSwiftPackageReference "aptos-swift-sdk" */;
+			productName = BIP32;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
