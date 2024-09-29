@@ -11,12 +11,10 @@ import Combine
 
 final class LobbyViewModel: ObservableObject {
     let web3AuthService: Web3AuthService
-    let rpcService: RPCService?
     let dartBoardService: DartBoardService
+    var aptosClientService: AptosClientService?
 
-    @Published var gameHostAddress: String?
-    @Published var gameHostNativeTokenBalance: String?
-    @Published var gameContractAddress: String?
+    @Published var gameContractAddress: String = "0x149a7bf28cd1d8bdb1bc3328ebbe330a10f63035f4e1b79aad1cdc8baa64ab69"
     @Published var isGameCreated: Bool = false
 
     var user: Web3AuthState? {
@@ -29,55 +27,25 @@ final class LobbyViewModel: ObservableObject {
         self.web3AuthService = web3AuthService
         self.dartBoardService = dartBoardService
 
-        if let user = web3AuthService.user {
-            self.rpcService = RPCService(
-                user: user,
-                rpcURL: "https://spicy-rpc.chiliz.com",
-                chainId: "88882"
-            )
-        } else {
-            print("Fail to initialize RPCService")
-            rpcService = nil
+        if let privateKey = web3AuthService.user?.privKey {
+            self.aptosClientService = AptosClientService(rawPrivateKey: privateKey)
         }
 
         setUpBindings()
     }
 
-    func getBalance() {
-        rpcService?.getBalance()
-    }
-
     func createGame() {
-        Task {
-            await rpcService?.createGame()
-        }
+//        aptosClientService?.initializeGame(contractAddress: gameContractAddress)
+        isGameCreated = true
     }
 }
 
 // MARK: - Private functions
 extension LobbyViewModel {
     private func setUpBindings() {
-        rpcService?.addressValueSubject
-            .sink { [weak self] address in
+        aptosClientService?.gameInitializedSubject
+            .sink { [weak self] in
                 DispatchQueue.main.async {
-                    self?.gameHostAddress = address
-                    print("Game Host address: \(address)")
-                }
-            }
-            .store(in: &cancellables)
-
-        rpcService?.nativeTokenBalValueSubject
-            .sink { [weak self] balance in
-                DispatchQueue.main.async {
-                    self?.gameHostNativeTokenBalance = balance?.description
-                }
-            }
-            .store(in: &cancellables)
-
-        rpcService?.gameContractSubject
-            .sink { [weak self] contractAddress in
-                DispatchQueue.main.async {
-                    self?.gameContractAddress = contractAddress
                     self?.isGameCreated = true
                 }
             }

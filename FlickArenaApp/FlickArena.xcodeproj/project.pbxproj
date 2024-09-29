@@ -19,6 +19,7 @@
 		348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */; };
 		34ACC53D2C8D755400609CF8 /* WaitPlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ACC53C2C8D755400609CF8 /* WaitPlayersViewModel.swift */; };
 		34ACC5402C8D758000609CF8 /* WaitPlayersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ACC53F2C8D758000609CF8 /* WaitPlayersScreen.swift */; };
+		34B3C4722CA96128005CE727 /* AptosClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B3C4712CA96128005CE727 /* AptosClientService.swift */; };
 		34B74B992C8840AB00FDEBF9 /* FlickArenaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */; };
 		34B74B9D2C8840AD00FDEBF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */; };
 		34B74BA02C8840AD00FDEBF9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B74B9F2C8840AD00FDEBF9 /* Preview Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		348F934C2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGamePlayerDisplayModel.swift; sourceTree = "<group>"; };
 		34ACC53C2C8D755400609CF8 /* WaitPlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitPlayersViewModel.swift; sourceTree = "<group>"; };
 		34ACC53F2C8D758000609CF8 /* WaitPlayersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitPlayersScreen.swift; sourceTree = "<group>"; };
+		34B3C4712CA96128005CE727 /* AptosClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosClientService.swift; sourceTree = "<group>"; };
 		34B74B952C8840AB00FDEBF9 /* FlickArena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickArena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B74B982C8840AB00FDEBF9 /* FlickArenaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickArenaApp.swift; sourceTree = "<group>"; };
 		34B74B9C2C8840AD00FDEBF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				34B74BC22C88437F00FDEBF9 /* DartBoardService.swift */,
 				344F73E02C8AB3480023465D /* Web3AuthService.swift */,
 				344F73F22C8D42690023465D /* RPCService.swift */,
+				34B3C4712CA96128005CE727 /* AptosClientService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34B74BD22C8960F300FDEBF9 /* GamePlayer.swift in Sources */,
+				34B3C4722CA96128005CE727 /* AptosClientService.swift in Sources */,
 				344F73EE2C8B5DDA0023465D /* LobbyViewModel.swift in Sources */,
 				344F73F52C8D43BF0023465D /* Web3AuthState+Extensions.swift in Sources */,
 				344F73F32C8D42690023465D /* RPCService.swift in Sources */,
@@ -502,6 +506,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -557,6 +562,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -585,9 +591,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuhsuan.FlickArena;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -615,9 +625,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuhsuan.FlickArena;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

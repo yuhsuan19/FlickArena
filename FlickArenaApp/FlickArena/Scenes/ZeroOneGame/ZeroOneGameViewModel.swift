@@ -13,7 +13,7 @@ import BigInt
 final class ZeroOneGameViewModel: ObservableObject {
 
     let dartBoardService: DartBoardService
-    let rpcService: RPCService
+    let aptosClientService: AptosClientService
     let gameContractAddress: String
 
     private var cancellables = Set<AnyCancellable>()
@@ -51,9 +51,9 @@ final class ZeroOneGameViewModel: ObservableObject {
         return records
     }
 
-    init(dartBoardService: DartBoardService, rpcService: RPCService, players: [GamePlayer], gameContractAddress: String) {
+    init(dartBoardService: DartBoardService, aptosClientService: AptosClientService, players: [GamePlayer], gameContractAddress: String) {
         self.players = players
-        self.rpcService = rpcService
+        self.aptosClientService = aptosClientService
         self.dartBoardService = dartBoardService
         self.gameContractAddress = gameContractAddress
 
@@ -107,13 +107,7 @@ extension ZeroOneGameViewModel {
         }
 
         let scoreToSend = scoreToRecord
-        Task {
-            await rpcService.dartOn(
-                gameContract: EthereumAddress(stringLiteral: gameContractAddress),
-                player: EthereumAddress(stringLiteral: currentPlayer.address),
-                score: scoreToSend
-            )
-        }
+        aptosClientService.dartOn(gameContract: gameContractAddress, player: currentPlayer.address, score: UInt64(scoreToSend))
 
         let newScore = currentPlayerScore - scoreToRecord
         guard newScore >= 0 else {

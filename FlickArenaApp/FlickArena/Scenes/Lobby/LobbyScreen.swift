@@ -18,7 +18,7 @@ struct LobbyScreen: View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Game Host Address:")
                 .font(.system(size: 30, weight: .bold))
-            Text(" \(viewModel.gameHostAddress ?? "loading...")")
+            Text(" \(viewModel.gameContractAddress)")
                 .font(.system(size: 24))
             Button(action: {
                 viewModel.createGame()
@@ -33,18 +33,12 @@ struct LobbyScreen: View {
             Spacer()
         }
         .padding()
-        .onAppear {
-            viewModel.getBalance()
-        }
         .navigationDestination(isPresented: $viewModel.isGameCreated) {
-            if let rpcService = viewModel.rpcService,
-               let gameContractAddress = viewModel.gameContractAddress,
-               let gameHostAddress = viewModel.gameHostAddress {
+            if let aptosClientService = viewModel.aptosClientService {
                 let viewModel = WaitPlayersViewModel(
-                    rpcService: rpcService,
+                    aptosClientService: aptosClientService,
                     dartBoardService: viewModel.dartBoardService,
-                    gameContractAddress: gameContractAddress,
-                    player1Address: gameHostAddress
+                    gameContractAddress: viewModel.gameContractAddress
                 )
                 WaitPlayersScreen(viewModel: viewModel)
             } else {
@@ -53,8 +47,3 @@ struct LobbyScreen: View {
         }
     }
 }
-
-//#Preview {
-//    let viewModel = LobbyViewModel(web3AuthService: Web3AuthService())
-//    return LobbyScreen(viewModel: viewModel)
-//}

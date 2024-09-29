@@ -46,13 +46,3 @@ struct ZeroOneGameScreen: View {
         }
     }
 }
-
-//import CoreBluetooth
-//#Preview {
-//    let viewModel = ZeroOneGameViewModel(
-//        dartBoardService: DartBoardService(
-//            centralManager: CBCentralManager()
-//        )
-//    )
-//    return ZeroOneGameScreen(viewModel: viewModel)
-//}

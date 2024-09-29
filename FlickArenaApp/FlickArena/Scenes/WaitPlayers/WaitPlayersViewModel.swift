@@ -14,7 +14,7 @@ import CoreImage.CIFilterBuiltins
 
 final class WaitPlayersViewModel: ObservableObject {
 
-    let rpcService: RPCService
+    let aptosClientService: AptosClientService
     let dartBoardService: DartBoardService
 
     let gameContractAddress: String
@@ -23,25 +23,24 @@ final class WaitPlayersViewModel: ObservableObject {
     @Published var canStartGame: Bool = false
     private var cancellables = Set<AnyCancellable>()
 
-    init(rpcService: RPCService, dartBoardService: DartBoardService, gameContractAddress: String, player1Address: String, player2Address: String? = nil) {
-        self.rpcService = rpcService
+    init(aptosClientService: AptosClientService, dartBoardService: DartBoardService, gameContractAddress: String, player2Address: String? = nil) {
+        self.aptosClientService = aptosClientService
         self.dartBoardService = dartBoardService
 
         self.gameContractAddress = gameContractAddress
-        self.player1Address = player1Address
         self.player2Address = player2Address
-
+        self.player1Address = aptosClientService.account.accountAddress.toString()
         setUpBindings()
     }
 
     func getPlayer2() {
         Task {
-            await rpcService.getPlayer2(contract: EthereumAddress(stringLiteral: gameContractAddress))
+            await aptosClientService.getPlayer2(contractAddress: gameContractAddress)
         }
     }
 
     func setUpBindings() {
-        rpcService.secondPlayerAddressSubject
+        aptosClientService.secondPlayerAddressSubject
             .sink { [weak self] address in
                 DispatchQueue.main.async {
                     self?.player2Address = address

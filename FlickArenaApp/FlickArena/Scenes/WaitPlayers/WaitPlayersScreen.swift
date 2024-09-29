@@ -48,7 +48,7 @@ struct WaitPlayersScreen: View {
             if let player2Address = viewModel.player2Address {
                 let viewModel = ZeroOneGameViewModel(
                     dartBoardService: viewModel.dartBoardService,
-                    rpcService: viewModel.rpcService,
+                    aptosClientService: viewModel.aptosClientService,
                     players: [GamePlayer(name: "Player1", address: viewModel.player1Address),
                               GamePlayer(name: "Player2", address: player2Address)],
                     gameContractAddress: viewModel.gameContractAddress
@@ -60,7 +60,3 @@ struct WaitPlayersScreen: View {
         }
     }
 }
-
-//#Preview {
-//    WaitPlayersScreen()
-//}
