@@ -6,20 +6,20 @@ FlickArena is an innovative on-chain game that combines the excitement of physic
 
 ## System Design
 
-![System Design](assets/system-design-aptos.png)
+![System Design](assets/sytem-design-aptos.png)
 
 ## Overview
 
-FlickArena integrates a physical dart board with smart contracts, creating a unique gaming experience where players' real-world dart throws are recorded and verified on the blockchain.
+FlickArena integrates a physical dart board with smart contracts, creating a unique gaming experience where players' real-world dart throws are recorded and verified on Aptos blockchain.
+
+## Demo Video
+
+https://youtu.be/SoAa28u1Q9I
 
 ## Screenshots
 
 ![Game Play](assets/game-play.jpeg)
 ![Winner](assets/winner.jpeg)
-
-## Demo Video
-
-https://youtu.be/SoAa28u1Q9I
 
 ## Features
 
@@ -38,11 +38,11 @@ https://youtu.be/SoAa28u1Q9I
 
 ## Technology Stack
 
-- Aptos blockchain
+- [Aptos](https://aptos.dev/en) blockchain
 - Move smart contracts
 - IoT sensors for dart board
-- Web3Atuh for user boarding and key management
-- Aptos Swift SDK for mobile integration
+- [Web3Atuh](https://web3auth.io/) for user boarding and key management
+- [Aptos](https://aptos.dev/en/build/sdks/community-sdks/swift-sdk) Swift SDK for mobile integration
 
 ### Contract Address on Aptos Testnet
 
@@ -50,7 +50,7 @@ https://youtu.be/SoAa28u1Q9I
 
 ## Getting Started
 
-Host create a game from the factory contract and share the game address with players.
+Host initialize a game with the game contract and share the game address with players.
 After the other player send funds to the game contract, they can start the game.
 
 ## Future Development
