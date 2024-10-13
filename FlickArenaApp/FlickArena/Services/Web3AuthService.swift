@@ -39,7 +39,7 @@ final class Web3AuthService {
             user = result
             logInSuccessSubject.send(())
         } catch {
-            print("Error")
+            print("Fail to login: \(error)")
         }
     }
 }
@@ -55,6 +55,11 @@ extension Web3AuthService{
                 network: network,
                 redirectUrl: "com.yuhsuan.FlickArena://auth"
             ))
+
+            if let state = web3Auth?.state {
+                user = state
+                logInSuccessSubject.send(())
+            }
         } catch {
             print("Something went wrong")
         }

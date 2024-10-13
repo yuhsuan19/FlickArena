@@ -19,7 +19,7 @@ struct WaitPlayersScreen: View {
             Text("Waiting for both players registered")
                 .font(.system(size: 20, weight: .bold))
             Text("Game Contract Address: \(viewModel.gameContractAddress)")
-            Image(uiImage: viewModel.generateQRCode(from: viewModel.gameContractAddress))
+            Image(uiImage: viewModel.generateGameContractQRCode())
                 .resizable()
                 .interpolation(.none)
                 .scaledToFit()
@@ -29,7 +29,7 @@ struct WaitPlayersScreen: View {
                 VStack(spacing: 16) {
                     Text("Player 1")
                         .bold()
-                    Text(viewModel.player1Address)
+                    Text(viewModel.player1Address ?? "Waiting for registered")
                 }
 
                 VStack(spacing: 16) {
@@ -42,16 +42,18 @@ struct WaitPlayersScreen: View {
         }
         .padding()
         .onAppear {
-            viewModel.getPlayer2()
+            viewModel.startPollingPlayer2()
         }
         .navigationDestination(isPresented: $viewModel.canStartGame) {
-            if let player2Address = viewModel.player2Address {
+            if let player1 = viewModel.player1Address,
+               let player2 = viewModel.player2Address {
                 let viewModel = ZeroOneGameViewModel(
                     dartBoardService: viewModel.dartBoardService,
-                    aptosClientService: viewModel.aptosClientService,
-                    players: [GamePlayer(name: "Player1", address: viewModel.player1Address),
-                              GamePlayer(name: "Player2", address: player2Address)],
-                    gameContractAddress: viewModel.gameContractAddress
+                    dartGameService: viewModel.dartGameService,
+                    players: [
+                        GamePlayer(name: "Player1", address: player1),
+                        GamePlayer(name: "Player2", address: player2)
+                    ]
                 )
                 ZeroOneGameScreen(viewModel: viewModel)
             } else {

@@ -13,8 +13,7 @@ import BigInt
 final class ZeroOneGameViewModel: ObservableObject {
 
     let dartBoardService: DartBoardService
-    let aptosClientService: AptosClientService
-    let gameContractAddress: String
+    let dartGameService: AptosDartGameService
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -51,23 +50,17 @@ final class ZeroOneGameViewModel: ObservableObject {
         return records
     }
 
-    init(dartBoardService: DartBoardService, aptosClientService: AptosClientService, players: [GamePlayer], gameContractAddress: String) {
-        self.players = players
-        self.aptosClientService = aptosClientService
+    init(
+        dartBoardService: DartBoardService,
+        dartGameService: AptosDartGameService, 
+        players: [GamePlayer]
+    ) {
         self.dartBoardService = dartBoardService
-        self.gameContractAddress = gameContractAddress
+        self.dartGameService = dartGameService
+        self.players = players
 
         setUpBindings()
         resetGame()
-    }
-
-    func test() {
-        Task {
-            do {
-                try await Task.sleep(nanoseconds: 1_000_000_000)
-                aptosClientService.dartOn(gameContract: gameContractAddress, player: "0x1bb83b05dac6bbd7ecf355d8e38e7652fcc1f930337fc72acf7fd9987dea82f7", score: 50)
-            }
-        }
     }
 }
 
@@ -116,7 +109,10 @@ extension ZeroOneGameViewModel {
         }
 
         let scoreToSend = scoreToRecord
-        aptosClientService.dartOn(gameContract: gameContractAddress, player: currentPlayer.address, score: UInt64(scoreToSend))
+        dartGameService.dartOn(
+            playerAddress: currentPlayer.address,
+            score: scoreToSend
+        )
 
         let newScore = currentPlayerScore - scoreToRecord
         guard newScore >= 0 else {
@@ -130,10 +126,6 @@ extension ZeroOneGameViewModel {
         var records = currentPlayerCurrentRoundRecords
         records.append((basedScore, type))
         gameRecords[currentPlayer]?[currentRound] = records
-
-        print(currentPlayer)
-        print(currentScores)
-        print(gameRecords)
 
         if newScore == 0 {
             decideWinner()
@@ -155,6 +147,7 @@ extension ZeroOneGameViewModel {
         } else {
             currentPlayerIndex += 1
         }
+        dartGameService.switchPlayer()
     }
 
     private func nextRound() {

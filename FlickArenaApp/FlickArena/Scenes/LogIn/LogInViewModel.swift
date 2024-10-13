@@ -16,7 +16,10 @@ final class LogInViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(web3AuthService: Web3AuthService, dartBoardService: DartBoardService) {
+    init(
+        web3AuthService: Web3AuthService,
+        dartBoardService: DartBoardService
+    ) {
         self.web3AuthService = web3AuthService
         self.dartBoardService = dartBoardService
         setUpBindings()

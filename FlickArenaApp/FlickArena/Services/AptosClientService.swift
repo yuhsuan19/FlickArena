@@ -29,99 +29,6 @@ final class AptosClientService {
         }
     }
 
-    func initializeGame(contractAddress: String) {
-        let targetScore: UInt64 = 301
-        let maxRounds: UInt64 = 10
-
-        Task {
-            do {
-                let rawTxn = try await client.transaction.build.simple(
-                    sender: account.accountAddress,
-                    data: InputEntryFunctionData(
-                        function: "\(contractAddress)::game::initialize",
-                        typeArguments: [],
-                        functionArguments: [targetScore, maxRounds ]
-                    )
-                )
-                let authenticator = try await client.transaction.sign.transaction(signer: account, transaction: rawTxn)
-                let response = try await client.transaction.submit.simple(transaction: rawTxn, senderAuthenticator: authenticator)
-                let txn = try await client.transaction.waitForTransaction(transactionHash: response.hash)
-                let transaction = try await client.transaction.getTransactionByHash(txn.hash)
-                print("Transaction Details: \(transaction)")
-
-                registerAndBet(contractAddress: contractAddress)
-            } catch {
-                print(error)
-            }
-        }
-    }
-
-    func registerAndBet(contractAddress: String) {
-        let betAmount: UInt64 = 10_000
-
-        Task {
-            do {
-                let rawTxn = try await client.transaction.build.simple(
-                    sender: account.accountAddress,
-                    data: InputEntryFunctionData(
-                        function: "\(contractAddress)::game::register_and_bet",
-                        typeArguments: [],
-                        functionArguments: [account.accountAddress.toString(), betAmount]
-                    )
-                )
-                let authenticator = try await client.transaction.sign.transaction(signer: account, transaction: rawTxn)
-                let response = try await client.transaction.submit.simple(transaction: rawTxn, senderAuthenticator: authenticator)
-                let txn = try await client.transaction.waitForTransaction(transactionHash: response.hash)
-                let transaction = try await client.transaction.getTransactionByHash(txn.hash)
-                print("Transaction Details: \(transaction)")
-                gameInitializedSubject.send(())
-            }
-        }
-    }
-
-    func getPlayer2(contractAddress: String) async {
-        while true {
-            do {
-                let payload = InputViewFunctionData(
-                    function: "\(contractAddress)::game::get_player_info",
-                    functionArguments: [account.accountAddress.toString(), 1]
-                )
-                if let results = try? await client.general.view(payload: payload) {
-                    let address = "\(results[0])"
-                    secondPlayerAddressSubject.send(address)
-                    break
-                } else {
-                    try await Task.sleep(nanoseconds: 3_000_000_000)
-                }
-            } catch {
-                print("Error fetching player2: \(error)")
-                break
-            }
-        }
-    }
-    
-    func dartOn(gameContract: String, player: String, score: UInt64) {
-        Task {
-            do {
-                let rawTxn = try await client.transaction.build.simple(
-                    sender: account.accountAddress,
-                    data: InputEntryFunctionData(
-                        function: "\(gameContract)::game::flick_dart",
-                        typeArguments: [],
-                        functionArguments: [player, score]
-                    )
-                )
-                let authenticator = try await client.transaction.sign.transaction(signer: account, transaction: rawTxn)
-                let response = try await client.transaction.submit.simple(transaction: rawTxn, senderAuthenticator: authenticator)
-                let txn = try await client.transaction.waitForTransaction(transactionHash: response.hash)
-                let transaction = try await client.transaction.getTransactionByHash(txn.hash)
-                print("Transaction Details: \(transaction)")
-            } catch {
-                print(error)
-            }
-        }
-    }
-
     func view(payload: InputViewFunctionData) async -> Result<[MoveValue], Error> {
         do {
             let results = try await client.general.view(payload: payload)
@@ -145,6 +52,7 @@ final class AptosClientService {
             let transactionResponse = try await client.transaction.getTransactionByHash(transaction.hash)
             return .success(transactionResponse)
         } catch {
+            print(error)
             return .failure(error)
         }
     }

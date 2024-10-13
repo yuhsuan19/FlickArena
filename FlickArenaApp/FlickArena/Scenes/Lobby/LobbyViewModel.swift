@@ -12,43 +12,43 @@ import Combine
 final class LobbyViewModel: ObservableObject {
     let web3AuthService: Web3AuthService
     let dartBoardService: DartBoardService
-    var aptosClientService: AptosClientService?
+    var aptosDartGameService: AptosDartGameService?
 
     @Published var gameContractAddress: String = "0x149a7bf28cd1d8bdb1bc3328ebbe330a10f63035f4e1b79aad1cdc8baa64ab69"
     @Published var isGameCreated: Bool = false
 
-    var user: Web3AuthState? {
-        web3AuthService.user
-    }
-
-    private var cancellables = Set<AnyCancellable>()
-
-    init(web3AuthService: Web3AuthService, dartBoardService: DartBoardService) {
+    init(
+        web3AuthService: Web3AuthService,
+        dartBoardService: DartBoardService
+    ) {
         self.web3AuthService = web3AuthService
         self.dartBoardService = dartBoardService
 
-        if let privateKey = web3AuthService.user?.privKey {
-            self.aptosClientService = AptosClientService(rawPrivateKey: privateKey)
+        if let privateKey = web3AuthService.user?.privKey,
+           let clientService = AptosClientService(rawPrivateKey: privateKey) {
+            aptosDartGameService = AptosDartGameService(
+                clientService: clientService,
+                contractAddress: gameContractAddress
+            )
         }
-
-        setUpBindings()
     }
 
     func createGame() {
-//        aptosClientService?.initializeGame(contractAddress: gameContractAddress)
-        isGameCreated = true
-    }
-}
-
-// MARK: - Private functions
-extension LobbyViewModel {
-    private func setUpBindings() {
-        aptosClientService?.gameInitializedSubject
-            .sink { [weak self] in
-                DispatchQueue.main.async {
-                    self?.isGameCreated = true
-                }
+        guard let aptosDartGameService else { return }
+        Task {
+            let result = await aptosDartGameService.createGame()
+            switch result {
+            case .success:
+                setGameCreated()
+            case let .failure(error):
+                print("Fail to create new game: \(error)")
             }
-            .store(in: &cancellables)
+        }
+    }
+
+    private func setGameCreated() {
+        DispatchQueue.main.async { [weak self] in
+            self?.isGameCreated = true
+        }
     }
 }

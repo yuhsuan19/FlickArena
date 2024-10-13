@@ -42,9 +42,6 @@ struct ZeroOneGameScreen: View {
                     }
                 }
             }
-            .onAppear {
-                viewModel.test()
-            }
             .padding()
         }
     }

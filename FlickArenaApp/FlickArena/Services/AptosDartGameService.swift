@@ -14,6 +14,8 @@ import Types
 final class AptosDartGameService {
     let gameContractAddress: String
     var hostAddress: String?
+    var player1Address: String?
+    var player2Address: String?
 
     private let clientService: AptosClientService
 
@@ -27,6 +29,7 @@ final class AptosDartGameService {
             try await initializeGame()
             hostAddress = clientService.account.accountAddress.toString()
             try await registerAndBet()
+            player1Address = clientService.account.accountAddress.toString()
             return .success(())
         } catch {
             return .failure(error)
@@ -46,7 +49,8 @@ final class AptosDartGameService {
                 let result = await clientService.view(payload: payload)
                 switch result {
                 case let .success(data):
-                    return "\(data[0])"
+                    player2Address = "\(data[0])"
+                    return player2Address
                 case .failure:
                     try await Task.sleep(nanoseconds: 3_000_000_000)
                 }
@@ -61,8 +65,17 @@ final class AptosDartGameService {
         Task {
             let functionData = InputEntryFunctionData(
                 function: "\(gameContractAddress)::game::flick_dart",
-                typeArguments: [],
                 functionArguments: [playerAddress, UInt64(score)]
+            )
+            await clientService.sendTransaction(functionData: functionData)
+        }
+    }
+
+    func switchPlayer() {
+        Task {
+            let functionData = InputEntryFunctionData(
+                function: "\(gameContractAddress)::game::switch_player",
+                functionArguments: []
             )
             await clientService.sendTransaction(functionData: functionData)
         }
@@ -74,7 +87,6 @@ extension AptosDartGameService {
     private func initializeGame(targetScore: Int = 301, numberOfRounds: Int = 10) async throws {
         let functionData = InputEntryFunctionData(
             function: "\(gameContractAddress)::game::initialize",
-            typeArguments: [],
             functionArguments: [
                 UInt64(targetScore),
                 UInt64(numberOfRounds)
@@ -94,7 +106,6 @@ extension AptosDartGameService {
 
         let functionData = InputEntryFunctionData(
             function: "\(gameContractAddress)::game::register_and_bet",
-            typeArguments: [],
             functionArguments: [
                 hostAddress,
                 betAmount

@@ -16,7 +16,7 @@ struct LobbyScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("Game Host Address:")
+            Text("Game Contrat Address:")
                 .font(.system(size: 30, weight: .bold))
             Text(" \(viewModel.gameContractAddress)")
                 .font(.system(size: 24))
@@ -34,11 +34,10 @@ struct LobbyScreen: View {
         }
         .padding()
         .navigationDestination(isPresented: $viewModel.isGameCreated) {
-            if let aptosClientService = viewModel.aptosClientService {
+            if let dartGameSevice = viewModel.aptosDartGameService {
                 let viewModel = WaitPlayersViewModel(
-                    aptosClientService: aptosClientService,
-                    dartBoardService: viewModel.dartBoardService,
-                    gameContractAddress: viewModel.gameContractAddress
+                    dartGameService: dartGameSevice,
+                    dartBoardService: viewModel.dartBoardService
                 )
                 WaitPlayersScreen(viewModel: viewModel)
             } else {

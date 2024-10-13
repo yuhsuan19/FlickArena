@@ -36,7 +36,10 @@ struct LogInScreen: View {
         }
         .padding(48)
         .navigationDestination(isPresented: $viewModel.isLoggedIn) {
-            let viewModel = LobbyViewModel(web3AuthService: viewModel.web3AuthService, dartBoardService: viewModel.dartBoardService)
+            let viewModel = LobbyViewModel(
+                web3AuthService: viewModel.web3AuthService,
+                dartBoardService: viewModel.dartBoardService
+            )
             LobbyScreen(viewModel: viewModel)
         }
     }

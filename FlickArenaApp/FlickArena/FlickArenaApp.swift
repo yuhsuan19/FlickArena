@@ -20,7 +20,10 @@ struct FlickArenaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let loginViewModel = LogInViewModel(web3AuthService: web3AuthService, dartBoardService: dartBoardService)
+            let loginViewModel = LogInViewModel(
+                web3AuthService: web3AuthService,
+                dartBoardService: dartBoardService
+            )
             NavigationStack {
                 LogInScreen(viewModel: loginViewModel)
             }
