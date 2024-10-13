@@ -1,18 +1,25 @@
 ![FlickArena Logo](assets/logo.png)
+
 # FlickArena
 
 FlickArena is an innovative on-chain game that combines the excitement of physical dart throwing with blockchain technology.
 
 ## System Design
-![System Design](assets/system-design.jpeg)
+
+![System Design](assets/system-design-aptos.png)
 
 ## Overview
 
 FlickArena integrates a physical dart board with smart contracts, creating a unique gaming experience where players' real-world dart throws are recorded and verified on the blockchain.
 
 ## Screenshots
+
 ![Game Play](assets/game-play.jpeg)
 ![Winner](assets/winner.jpeg)
+
+## Demo Video
+
+https://youtu.be/SoAa28u1Q9I
 
 ## Features
 
@@ -27,18 +34,19 @@ FlickArena integrates a physical dart board with smart contracts, creating a uni
 2. Sensors capture throw data and send it to our iOS app through BLE
 3. Data is sent to the blockchain
 4. Smart contracts verify and record scores
-5. Players earn tokens based on performance
+5. Players earn tokens based on the game result
 
 ## Technology Stack
 
-- Ethereum blockchain Chiliz
-- Solidity smart contracts
+- Aptos blockchain
+- Move smart contracts
 - IoT sensors for dart board
-- Web3.swift for mobile integration
+- Web3Atuh for user boarding and key management
+- Aptos Swift SDK for mobile integration
 
-### Contract Address on Chiliz Testnet
- - Factory contract: https://testnet.chiliscan.com/address/0x405Bb05F3584CE93c1c033091b420199715E6555/contract/88882/code
- - Game contract: https://testnet.chiliscan.com/address/0xbD3B8462B96Ef9b51DeE13a46901D781e386EA34/contract/88882/code
+### Contract Address on Aptos Testnet
+
+- Game contract: https://explorer.aptoslabs.com/account/0x149a7bf28cd1d8bdb1bc3328ebbe330a10f63035f4e1b79aad1cdc8baa64ab69/modules/code/game?network=testnet
 
 ## Getting Started
 
@@ -54,4 +62,5 @@ To create a social experience where you can challenge your friends to a game of 
 We welcome contributions! Please open a pull request here on github.
 
 ## License
+
 Apache-2.0 license
