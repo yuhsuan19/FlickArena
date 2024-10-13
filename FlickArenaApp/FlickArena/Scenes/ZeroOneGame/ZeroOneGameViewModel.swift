@@ -60,6 +60,15 @@ final class ZeroOneGameViewModel: ObservableObject {
         setUpBindings()
         resetGame()
     }
+
+    func test() {
+        Task {
+            do {
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                aptosClientService.dartOn(gameContract: gameContractAddress, player: "0x1bb83b05dac6bbd7ecf355d8e38e7652fcc1f930337fc72acf7fd9987dea82f7", score: 50)
+            }
+        }
+    }
 }
 
 // MARK: - Private functions

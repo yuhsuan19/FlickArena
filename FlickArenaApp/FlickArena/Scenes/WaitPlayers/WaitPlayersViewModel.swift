@@ -35,7 +35,10 @@ final class WaitPlayersViewModel: ObservableObject {
 
     func getPlayer2() {
         Task {
-            await aptosClientService.getPlayer2(contractAddress: gameContractAddress)
+            do {
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                await aptosClientService.getPlayer2(contractAddress: gameContractAddress)
+            }
         }
     }
 

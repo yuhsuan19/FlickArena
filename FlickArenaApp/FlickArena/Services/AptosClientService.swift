@@ -58,7 +58,7 @@ final class AptosClientService {
 
     func registerAndBet(contractAddress: String) {
         let betAmount: UInt64 = 10_000
-        
+
         Task {
             do {
                 let rawTxn = try await client.transaction.build.simple(
@@ -99,8 +99,53 @@ final class AptosClientService {
             }
         }
     }
-
+    
     func dartOn(gameContract: String, player: String, score: UInt64) {
+        Task {
+            do {
+                let rawTxn = try await client.transaction.build.simple(
+                    sender: account.accountAddress,
+                    data: InputEntryFunctionData(
+                        function: "\(gameContract)::game::flick_dart",
+                        typeArguments: [],
+                        functionArguments: [player, score]
+                    )
+                )
+                let authenticator = try await client.transaction.sign.transaction(signer: account, transaction: rawTxn)
+                let response = try await client.transaction.submit.simple(transaction: rawTxn, senderAuthenticator: authenticator)
+                let txn = try await client.transaction.waitForTransaction(transactionHash: response.hash)
+                let transaction = try await client.transaction.getTransactionByHash(txn.hash)
+                print("Transaction Details: \(transaction)")
+            } catch {
+                print(error)
+            }
+        }
+    }
 
+    func view(payload: InputViewFunctionData) async -> Result<[MoveValue], Error> {
+        do {
+            let results = try await client.general.view(payload: payload)
+            return .success(results)
+        } catch {
+            return .failure(error)
+        }
+
+    }
+
+    @discardableResult
+    func sendTransaction(functionData: InputGenerateTransactionPayloadData) async -> Result<TransactionResponse, Error> {
+        do {
+            let rawTransaction = try await client.transaction.build.simple(
+                sender: account.accountAddress,
+                data: functionData
+            )
+            let authenticator = try await client.transaction.sign.transaction(signer: account, transaction: rawTransaction)
+            let response = try await client.transaction.submit.simple(transaction: rawTransaction, senderAuthenticator: authenticator)
+            let transaction = try await client.transaction.waitForTransaction(transactionHash: response.hash)
+            let transactionResponse = try await client.transaction.getTransactionByHash(transaction.hash)
+            return .success(transactionResponse)
+        } catch {
+            return .failure(error)
+        }
     }
 }

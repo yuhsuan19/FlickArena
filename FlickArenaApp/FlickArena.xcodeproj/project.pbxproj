@@ -35,6 +35,7 @@
 		34B74BD82C89705500FDEBF9 /* ZeroOneGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B74BD72C89705500FDEBF9 /* ZeroOneGameViewModel.swift */; };
 		34E35EC22C9D24D4007DA0AD /* Aptos in Frameworks */ = {isa = PBXBuildFile; productRef = 34E35EC12C9D24D4007DA0AD /* Aptos */; };
 		34E35EC42C9D24D4007DA0AD /* BIP32 in Frameworks */ = {isa = PBXBuildFile; productRef = 34E35EC32C9D24D4007DA0AD /* BIP32 */; };
+		34FBE7AA2CB90BA5001721F2 /* AptosDartGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FBE7A92CB90BA5001721F2 /* AptosDartGameService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		34B74BD12C8960F300FDEBF9 /* GamePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayer.swift; sourceTree = "<group>"; };
 		34B74BD32C89613900FDEBF9 /* ZeroOneGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGameScreen.swift; sourceTree = "<group>"; };
 		34B74BD72C89705500FDEBF9 /* ZeroOneGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneGameViewModel.swift; sourceTree = "<group>"; };
+		34FBE7A92CB90BA5001721F2 /* AptosDartGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosDartGameService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				344F73E02C8AB3480023465D /* Web3AuthService.swift */,
 				344F73F22C8D42690023465D /* RPCService.swift */,
 				34B3C4712CA96128005CE727 /* AptosClientService.swift */,
+				34FBE7A92CB90BA5001721F2 /* AptosDartGameService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				34B74BCA2C886A5700FDEBF9 /* Data+Extensions.swift in Sources */,
 				34ACC5402C8D758000609CF8 /* WaitPlayersScreen.swift in Sources */,
 				34ACC53D2C8D755400609CF8 /* WaitPlayersViewModel.swift in Sources */,
+				34FBE7AA2CB90BA5001721F2 /* AptosDartGameService.swift in Sources */,
 				348F934D2C89A83300A99D14 /* ZeroOneGamePlayerDisplayModel.swift in Sources */,
 				344F73EC2C8B5DCB0023465D /* LobbyScreen.swift in Sources */,
 				344F73E72C8B52F70023465D /* LogInScreen.swift in Sources */,
