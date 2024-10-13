@@ -30,11 +30,13 @@ https://youtu.be/SoAa28u1Q9I
 
 ## How It Works
 
-1. Players throw darts at the physical board
-2. Sensors capture throw data and send it to our iOS app through BLE
-3. Data is sent to the blockchain
-4. Smart contracts verify and record scores
-5. Players earn tokens based on the game result
+1. The host initialize a game with the game contract
+2. The other player send funds to the game contract to start the game
+3. Players throw darts at the physical board
+4. Sensors capture throw data and send it to our iOS app through BLE
+5. Data is sent to the blockchain
+6. Smart contracts verify and record scores
+7. Players earn tokens based on the game result
 
 ## Technology Stack
 
@@ -42,16 +44,11 @@ https://youtu.be/SoAa28u1Q9I
 - Move smart contracts
 - IoT sensors for dart board
 - [Web3Atuh](https://web3auth.io/) for user boarding and key management
-- [Aptos](https://aptos.dev/en/build/sdks/community-sdks/swift-sdk) Swift SDK for mobile integration
+- [Aptos Swift SDK](https://aptos.dev/en/build/sdks/community-sdks/swift-sdk) for mobile integration
 
 ### Contract Address on Aptos Testnet
 
 - Game contract: https://explorer.aptoslabs.com/account/0x149a7bf28cd1d8bdb1bc3328ebbe330a10f63035f4e1b79aad1cdc8baa64ab69/modules/code/game?network=testnet
-
-## Getting Started
-
-Host initialize a game with the game contract and share the game address with players.
-After the other player send funds to the game contract, they can start the game.
 
 ## Future Development
 
